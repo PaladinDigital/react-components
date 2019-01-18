@@ -21,8 +21,7 @@ export class TabbedContent extends React.Component {
   renderTabs () {
     let content = this.props.content;
     return Object.keys(content).map(key => {
-      let tab = content[key];
-      if (tab.title === this.state.activeTab.title) {
+      if (key === this.state.activeTab) {
         return <li key={key} className="is-active">{content[key].title}</li>
       } else {
         return <li key={key}><a data-tab={key} onClick={this.changeTab}>{content[key].title}</a></li>      }
