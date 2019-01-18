@@ -10,6 +10,10 @@ export class DataTable extends React.Component {
     return cols;
   }
 
+  static defaultProps = {
+    primaryKey: 'id'
+  }
+
   getImplicitColumns () {
     let columns = {};
     this.props.items.map(i => {

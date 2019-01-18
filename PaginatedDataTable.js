@@ -49,7 +49,7 @@ export class PaginatedDataTable extends DataTable {
     let hasNext = this.getEndIndex() <= this.props.items.length;
     if (hasNext) {
       return <button
-        className="btn button is-pulled-right"
+        className="btn button is-small is-pulled-right"
         onClick={this.nextPage.bind(this)}
       >{this.props.nextPageLabel}</button>;
     }
@@ -59,7 +59,7 @@ export class PaginatedDataTable extends DataTable {
   renderPrevButton () {
     if (this.state.page > 1) {
       return <button
-        className="btn button"
+        className="btn button is-small"
         onClick={this.prevPage.bind(this)}
       >{this.props.prevPageLabel}</button>;
     }
@@ -105,7 +105,7 @@ export class PaginatedDataTable extends DataTable {
         cssClass = i.className;
       }
 
-      return <tr key={i.name} className={cssClass}>
+      return <tr key={i[this.props.primaryKey]} className={cssClass}>
         {
           columns.map(c => {
             return this.renderField(i, c)
