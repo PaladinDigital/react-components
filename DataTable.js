@@ -1,38 +1,43 @@
 import React from 'react'
 
 export class DataTable extends React.Component {
-  getColumns () {
-    let cols = this.props.columns
-    if (!cols) {
-      // If we dont have explicit columns, try to be implicit.
-      cols = this.getImplicitColumns();
-    }
-    return cols;
-  }
 
   static defaultProps = {
     primaryKey: 'id'
   }
 
+  getColumns () {
+    let cols = this.props.columns
+    if (!cols) {
+      // If we dont have explicit columns, try to be implicit.
+      cols = this.getImplicitColumns()
+    }
+    return cols
+  }
+
   getImplicitColumns () {
-    let columns = {};
+    let columns = {}
     this.props.items.map(i => {
       Object.keys(i).map(col => {
-        if (typeof columns[col] === "undefined") {
-          columns[col] = {field: col, name: col}
+        if (typeof columns[col] === 'undefined') {
+          columns[col] = {
+            field: col,
+            name: col
+          }
         }
-      });
-    });
-    let columnArray = [];
-    Object.keys(columns).map(col => {
-      columnArray.push(columns[col]);
+      })
     })
 
-    return columnArray;
+    let columnArray = []
+    Object.keys(columns).map(col => {
+      columnArray.push(columns[col])
+    })
+
+    return columnArray
   }
 
   renderColumnHeadings () {
-    let cols = this.getColumns();
+    let cols = this.getColumns()
 
     return <tr>{cols.map(c => {
       return <th key={c.field}>{c.name}</th>
@@ -45,7 +50,7 @@ export class DataTable extends React.Component {
 
   renderField (item, column) {
     let key = this.getFieldKey(item, column)
-    if (typeof column.field === "function") {
+    if (typeof column.field === 'function') {
       return <td key={key}>{column.field(item)}</td>
     }
 
@@ -61,9 +66,9 @@ export class DataTable extends React.Component {
 
 
     return items.map(i => {
-      let cssClass = '';
-      if (typeof i.className !== "undefined") {
-        cssClass = i.className;
+      let cssClass = ''
+      if (typeof i.className !== 'undefined') {
+        cssClass = i.className
       }
 
       return <tr key={i.name} className={cssClass}>
@@ -77,8 +82,8 @@ export class DataTable extends React.Component {
   }
 
   tableClasses () {
-    let classNames = ['table'];
-    if (typeof this.props.classes !== "undefined") {
+    let classNames = ['table']
+    if (typeof this.props.classes !== 'undefined') {
       this.props.classes.map(c => {
         classNames.push(c)
       })
