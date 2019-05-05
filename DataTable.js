@@ -1,7 +1,6 @@
 import React from 'react'
 
 export class DataTable extends React.Component {
-
   static defaultProps = {
     primaryKey: 'id'
   }
