@@ -3,8 +3,8 @@ import React from 'react'
 
 export class PaginatedDataTable extends DataTable {
   constructor (props) {
-    super(props);
-    this.state = {page: 1};
+    super(props)
+    this.state = {page: 1}
   }
 
   static defaultProps = {
@@ -14,46 +14,46 @@ export class PaginatedDataTable extends DataTable {
 
   getPerPage () {
     if (typeof this.props.perPage === "undefined") {
-      return 25;
+      return 25
     }
-    return this.props.perPage;
+    return this.props.perPage
   }
 
   getStartIndex(perPage = this.getPerPage()) {
-    return (this.state.page - 1) * perPage;
+    return (this.state.page - 1) * perPage
   }
 
   getEndIndex(startIndex = false, perPage = this.getPerPage()) {
     if (!startIndex) {
-      startIndex = this.getStartIndex(perPage);
+      startIndex = this.getStartIndex(perPage)
     }
-    return startIndex + perPage;
+    return startIndex + perPage
   }
 
   getItems () {
     let items = this.props.items;
-    let paginateAmount = this.getPerPage();
+    let paginateAmount = this.getPerPage()
 
     if (items.length <= paginateAmount) {
-      return items;
+      return items
     }
 
-    let perPage = this.getPerPage();
-    let startIndex = this.getStartIndex(perPage);
-    let endIndex = this.getEndIndex(startIndex, perPage);
+    let perPage = this.getPerPage()
+    let startIndex = this.getStartIndex(perPage)
+    let endIndex = this.getEndIndex(startIndex, perPage)
 
-    return items.slice(startIndex, endIndex);
+    return items.slice(startIndex, endIndex)
   }
 
   renderNextButton () {
-    let hasNext = this.getEndIndex() <= this.props.items.length;
+    let hasNext = this.getEndIndex() <= this.props.items.length
     if (hasNext) {
       return <button
         className="btn button is-small is-pulled-right"
         onClick={this.nextPage.bind(this)}
-      >{this.props.nextPageLabel}</button>;
+      >{this.props.nextPageLabel}</button>
     }
-    return '';
+    return ''
   }
 
   renderPrevButton () {
@@ -61,13 +61,13 @@ export class PaginatedDataTable extends DataTable {
       return <button
         className="btn button is-small"
         onClick={this.prevPage.bind(this)}
-      >{this.props.prevPageLabel}</button>;
+      >{this.props.prevPageLabel}</button>
     }
-    return '';
+    return ''
   }
 
   renderControls () {
-    let colCount = this.getColumns().length;
+    let colCount = this.getColumns().length
 
     return (
       <>
@@ -80,20 +80,20 @@ export class PaginatedDataTable extends DataTable {
   }
 
   nextPage () {
-    let nextPage = this.state.page + 1;
-    this.setState({page: nextPage});
+    let nextPage = this.state.page + 1
+    this.setState({page: nextPage})
   }
 
   prevPage () {
     if (this.state.page > 1) {
-      let prevPage = this.state.page - 1;
-      this.setState({ page: prevPage });
+      let prevPage = this.state.page - 1
+      this.setState({ page: prevPage })
     }
   }
 
   renderData () {
-    let items = this.getItems();
-    let columns = this.getColumns();
+    let items = this.getItems()
+    let columns = this.getColumns()
     if (!items || !columns) {
       return ''
     }
@@ -102,7 +102,7 @@ export class PaginatedDataTable extends DataTable {
     return items.map(i => {
       let cssClass = '';
       if (typeof i.className !== "undefined") {
-        cssClass = i.className;
+        cssClass = i.className
       }
 
       return <tr key={i[this.props.primaryKey]} className={cssClass}>
