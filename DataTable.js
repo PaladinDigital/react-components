@@ -1,10 +1,6 @@
 import React from 'react'
 
-export class DataTable extends React.Component {
-  static defaultProps = {
-    primaryKey: 'id'
-  }
-
+class DataTable extends React.Component {
   getColumns () {
     let cols = this.props.columns
     if (!cols) {
@@ -58,11 +54,10 @@ export class DataTable extends React.Component {
 
   renderData () {
     let items = this.props.items
-    let columns = this.getColumns();
+    let columns = this.getColumns()
     if (!items || !columns) {
       return ''
     }
-
 
     return items.map(i => {
       let cssClass = ''
@@ -103,3 +98,9 @@ export class DataTable extends React.Component {
     )
   }
 }
+DataTable.defaultProps = {
+  primaryKey: 'id'
+}
+
+export default DataTable
+export { DataTable }
